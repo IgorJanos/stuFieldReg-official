@@ -1,0 +1,10 @@
+matplotlib
+scikit-image
+opencv-python
+opencv-contrib-python
+soccernet
+pandas
+kornia
+segmentation_models_pytorch
+lpips
+pytorch_histogram_matching
