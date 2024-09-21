@@ -4,11 +4,6 @@ This is the official repository of the paper Football Playing Field Registration
 You can find our original paper at - ..TODO..
 
 
-<video class="aligncenter" controls="controls">
-<source type="video/mp4" src="https://vggnas.fiit.stuba.sk/download/janos/fieldreg/out-side-by-side.mp4" />
-Oops. HTML 5 video not supported.
-</video>
-
 
 The development environment is prepared inside the docker container. You can mount your host 
 data folder into the container into the mount point `/workspace/stuFieldReg/.scratch`.
