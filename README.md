@@ -15,7 +15,7 @@ We wish to thank the authors for making their code and models publicly available
  - [https://github.com/ericsujw/KpSFR](https://github.com/ericsujw/KpSFR)
  - [https://github.com/MM4SPA/tvcalib](https://github.com/MM4SPA/tvcalib)
 
-
+![](./doc/images/side-by-side.gif)
 
 ## Datasets
 
