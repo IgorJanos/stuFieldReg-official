@@ -1,0 +1,14 @@
+_target_: torchvision.transforms.Compose
+transforms:
+  - _target_: methods.fieldreg.data.transforms.HistogramMatching
+    p: 0.75
+    root: /mnt/datasets/fiit/tvcalib/wc14-test
+  - _target_: torchvision.transforms.ColorJitter
+    brightness: 0.1
+    contrast: 0.1
+    saturation: 0.2
+    hue: 0.0
+  - _target_: methods.fieldreg.data.transforms.GaussianNoise
+    sigma: 0.02
+  - _target_: methods.fieldreg.data.transforms.ColorOffset
+    sigma: 0.04

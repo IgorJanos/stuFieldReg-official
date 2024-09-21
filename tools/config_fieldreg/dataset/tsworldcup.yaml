@@ -1,0 +1,19 @@
+train:
+  _target_: methods.fieldreg.data.adapter.FieldRegDatasetAdapter
+  dataset:
+    _target_: methods.common.datasets.tsworldcup.TsWorldCupDataset
+    subset_filepath: .scratch/dataset/tsworldcup/train.txt
+  noise_translate: ${common.noise_translate}
+  noise_rotate: ${common.noise_rotate}
+  random_flip: True
+  playfield_shape: ${common.playfield_shape}
+
+val:
+  _target_: methods.fieldreg.data.adapter.FieldRegDatasetAdapter
+  dataset:
+    _target_: methods.common.datasets.tsworldcup.TsWorldCupDataset
+    subset_filepath: .scratch/dataset/tsworldcup/test.txt
+  noise_translate: 0.0
+  noise_rotate: 0.0
+  random_flip: False
+  playfield_shape: ${common.playfield_shape}

@@ -1,0 +1,3 @@
+_target_: torchvision.transforms.Compose
+transforms:
+  - _target_: fieldreg.data.transforms.NullTransform

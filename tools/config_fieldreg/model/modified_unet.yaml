@@ -1,0 +1,15 @@
+_target_: methods.fieldreg.models.modified.ModifiedSegmentationModelUnet
+chin: 3
+chout: ${common.output_channels}
+
+encoder_name: resnet18
+encoder_depth: 5
+encoder_weights: imagenet
+
+decoder_channels: [1024, 512, 256, 128, 64]
+decoder_attention_type: none
+gated_kernel: [0, 0, 0, 0, 0]
+
+final_kernel_size: 1
+middle_channels: 32
+

@@ -1,0 +1,80 @@
+hydra:
+  run:
+    dir: .scratch/experiments/${exp.name}/${exp.ver}
+
+
+
+datamodule:
+  _target_: methods.fieldreg.datamodule.FieldRegDataModule
+
+module:
+  _target_: methods.fieldreg.module.FieldRegModule
+
+optimizer:
+  _target_: torch.optim.Adam
+  lr: ${common.learning_rate}
+  betas: [0.9, 0.999]
+  weight_decay: 0.0
+  eps: 1e-4
+
+scheduler:
+  _target_: torch.optim.lr_scheduler.StepLR
+  step_size: 1
+  gamma: 0.9
+
+
+
+# Default groups
+defaults:
+  - _self_
+  - augmentation: none
+  - model: modified_unet
+  - dataset: calib360
+
+
+#
+# Extra trackers
+trackers:
+#  - _target_: project.trackers.wandb_tracker.WandBTracker
+#    project: __PUT_YOUR_PROJECT_HERE__
+#    entity: __PUT_YOUR_ENTITY_HERE__
+#    log_dir: .scratch
+
+
+# Extra loggers
+loggers:
+  - _target_: methods.fieldreg.loggers.preview.FieldRegPreviewLogger
+    num_images: 3
+    threshold: 0.85
+    playfield_shape: ${common.playfield_shape}
+
+
+# Common settings
+common:
+  batch_size: 8
+  num_workers: 16
+  max_epochs: 12
+  checkpoint_interval: -1
+  checkpoint_epoch_interval: 1
+  learning_rate: 0.0015
+  lambda_pixel: 1.0
+  lambda_perceptual: 0.1
+
+  # Dataset stuff
+  noise_translate: 5.0
+  noise_rotate: 0.0084
+
+  # Playfield stuff
+  playfield_shape: [ 14, 7 ]
+  output_channels: 21
+
+
+
+# Experiment stuff
+exp:
+  name: fieldreg
+  ver: 0
+  id: ${.name}.${.ver}
+  wandb: True
+
+continue_from: ""
