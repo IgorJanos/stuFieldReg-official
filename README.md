@@ -10,6 +10,12 @@ data folder into the container into the mount point `/workspace/stuFieldReg/.scr
 
 Please, inspect the `.devcontainer/devcontainer.json` and `docker/run.sh` files for more information.
 
+This repository also contains parts of code refactored from and based on other github repositories. 
+We wish to thank the authors for making their code and models publicly available:
+ - [https://github.com/ericsujw/KpSFR](https://github.com/ericsujw/KpSFR)
+ - [https://github.com/MM4SPA/tvcalib](https://github.com/MM4SPA/tvcalib)
+
+
 
 ## Datasets
 
