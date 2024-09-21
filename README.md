@@ -28,7 +28,11 @@ In our work we use 3 datasets. You can download them at the following addresses:
 
 You can download our best pre-trained model from:
 
- - ..TODO..
+ - [fieldreg-experiments.tar.gz](https://vggnas.fiit.stuba.sk/download/janos/fieldreg/fieldreg-experiments.tar.gz) 3.5 GB
+
+Extract the content of the archive into the `/workspace/stuFieldReg/.scratch` folder
+inside the container. The inference script expects to find the models 
+in `/workspace/stuFieldReg/.scratch/experiments`.
 
 ## License
 
