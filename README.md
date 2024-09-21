@@ -26,7 +26,7 @@ In our work we use 3 datasets. You can download them at the following addresses:
 
 ## Pre-trained Model
 
-You can download our best pre-trained model from:
+You can download our best pre-trained models from:
 
  - [fieldreg-experiments.tar.gz](https://vggnas.fiit.stuba.sk/download/janos/fieldreg/fieldreg-experiments.tar.gz) 3.5 GB
 
