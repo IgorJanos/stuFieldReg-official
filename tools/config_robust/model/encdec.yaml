@@ -1,0 +1,5 @@
+_target_: methods.robust.models.model.EncDec
+layers: 18
+n_classes: ${common.num_classes}
+non_local: True
+pretrained: True

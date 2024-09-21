@@ -1,0 +1,73 @@
+hydra:
+  run:
+    dir: .scratch/experiments/${exp.name}/${exp.ver}
+
+
+
+datamodule:
+  _target_: methods.robust.datamodule.RobustDataModule
+
+module:
+  _target_: methods.robust.module.RobustModule
+
+optimizer:
+  _target_: torch.optim.Adam
+  lr: ${common.learning_rate}
+  betas: [0.9, 0.999]
+  weight_decay: 0.0
+  eps: 1e-4
+
+scheduler:
+  _target_: torch.optim.lr_scheduler.StepLR
+  step_size: 25
+  gamma: 0.1
+
+
+
+# Default groups
+defaults:
+  - _self_
+  - model: encdec
+  - dataset: calib360
+
+
+#
+# Extra trackers
+trackers:
+#  - _target_: project.trackers.wandb_tracker.WandBTracker
+#    project: __PUT_YOUR_PROJECT_HERE__
+#    entity: __PUT_YOUR_ENTITY_HERE__
+#    log_dir: .scratch
+
+
+# Extra loggers
+loggers:
+  - _target_: methods.robust.loggers.preview.RobustPreviewLogger
+    num_images: 3
+    homography_units: yards
+
+# Common settings - Copied from original implementation
+common:
+  batch_size: 8
+  num_workers: 16
+  max_epochs: 12
+  checkpoint_interval: -1
+  checkpoint_epoch_interval: 1
+  learning_rate: 0.0001
+  lambda_pixel: 1.0
+  lambda_perceptual: 0.1
+
+  # Dataset stuff
+  num_classes: 92
+  noise_translate: 5.0
+  noise_rotate: 0.0084
+
+
+# Experiment stuff
+exp:
+  name: robust
+  ver: 0
+  id: ${.name}.${.ver}
+  wandb: True
+
+continue_from: ""

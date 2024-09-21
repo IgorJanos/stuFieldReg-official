@@ -1,0 +1,17 @@
+train:
+  _target_: methods.robust.data.adapter.RobustDatasetAdapter
+  dataset:
+    _target_: methods.common.datasets.wc2014.WorldCup2014Dataset
+    folder: .scratch/dataset/wc2014/soccer_data/train_val
+  noise_translate: ${common.noise_translate}
+  noise_rotate: ${common.noise_rotate}
+  random_flip: True
+
+val:
+  _target_: methods.robust.data.adapter.RobustDatasetAdapter
+  dataset:
+    _target_: methods.common.datasets.wc2014.WorldCup2014Dataset
+    folder: .scratch/dataset/wc2014/soccer_data/test
+  noise_translate: 0.0
+  noise_rotate: 0.0
+  random_flip: False
