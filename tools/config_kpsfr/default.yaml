@@ -1,0 +1,76 @@
+hydra:
+  run:
+    dir: .scratch/experiments/${exp.name}/${exp.ver}
+
+
+
+datamodule:
+  _target_: methods.kpsfr.datamodule.KpsfrDataModule
+
+module:
+  _target_: methods.kpsfr.module.KpsfrModule
+
+optimizer:
+  _target_: torch.optim.Adam
+  lr: ${common.learning_rate}
+  betas: [0.9, 0.999]
+  weight_decay: 0.0
+  eps: 1e-4
+
+scheduler:
+  _target_: torch.optim.lr_scheduler.StepLR
+  step_size: 100
+  gamma: 0.1
+
+
+
+# Default groups
+defaults:
+  - _self_
+  - model: kpsfr
+  - dataset: wc2014
+
+#
+# Extra trackers
+trackers:
+#  - _target_: project.trackers.wandb_tracker.WandBTracker
+#    project: __PUT_YOUR_PROJECT_HERE__
+#    entity: __PUT_YOUR_ENTITY_HERE__
+#    log_dir: .scratch
+
+# Extra loggers
+loggers:
+  - _target_: methods.kpsfr.loggers.preview.KpsfrPreviewLogger
+    num_images: 3
+    homography_units: yards
+
+
+# Common settings - Copied from original implementation
+common:
+  batch_size: 4
+  num_workers: 4
+  max_epochs: 300
+  checkpoint_interval: -1
+  checkpoint_epoch_interval: 5
+  learning_rate: 0.0001
+  lambda_pixel: 1.0
+  lambda_perceptual: 0.1
+
+  # Dataset stuff  
+  noise_translate: 5.0
+  noise_rotate: 0.0084
+
+  # KPSFR specific stuff
+  num_objects: 4
+  pretrain_checkpoint: .scratch/models/kpsfr/kpsfr.pth
+
+
+
+# Experiment stuff
+exp:
+  name: kpsfr
+  ver: 0
+  id: ${.name}.${.ver}
+  wandb: True
+
+continue_from: ""

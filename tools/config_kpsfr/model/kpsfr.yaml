@@ -1,0 +1,5 @@
+_target_: methods.kpsfr.models.network.KpSFR
+model_archi: KC
+num_objects: ${common.num_objects}
+non_local: True
+

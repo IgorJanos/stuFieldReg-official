@@ -1,0 +1,40 @@
+train:
+  _target_: methods.kpsfr.data.adapter.KpsfrDatasetAdapter
+  dataset:
+    _target_: methods.common.datasets.compose.ComposeDataset
+    weights: [ 1, 2, 15 ]
+    datasets:
+      # Calib-360 Dataset
+      - _target_: methods.fieldreg.data.adapter.Calib360Adapter
+        dataset:
+          _target_: methods.fieldreg.data.dataset.SampleDataset
+          root: /mnt/datasets/fiit/calib360/train
+          load_images: True
+          load_dmaps: False
+          load_sample: True
+          grayscale: False
+        target_shape: [720, 1280]
+
+      # TS WorldCup
+      - _target_: methods.common.datasets.tsworldcup.TsWorldCupDataset
+        subset_filepath: .scratch/dataset/tsworldcup/train.txt
+
+      # WorldCup 2014
+      - _target_: methods.common.datasets.wc2014.WorldCup2014Dataset
+        folder: .scratch/dataset/wc2014/soccer_data/train_val
+
+  num_objects: ${common.num_objects}
+  noise_translate: ${common.noise_translate}
+  noise_rotate: ${common.noise_rotate}
+  random_flip: True
+  max_count: -1
+
+val:
+  _target_: methods.kpsfr.data.adapter.KpsfrDatasetAdapter
+  dataset:
+    _target_: methods.common.datasets.wc2014.WorldCup2014Dataset
+    folder: .scratch/dataset/wc2014/soccer_data/test
+  num_objects: ${common.num_objects}
+  noise_translate: 0.0
+  noise_rotate: 0.0
+  random_flip: False

@@ -1,0 +1,19 @@
+train:
+  _target_: methods.kpsfr.data.adapter.KpsfrDatasetAdapter
+  dataset:
+    _target_: methods.common.datasets.wc2014.WorldCup2014Dataset
+    folder: .scratch/dataset/wc2014/soccer_data/train_val
+  num_objects: ${common.num_objects}
+  noise_translate: ${common.noise_translate}
+  noise_rotate: ${common.noise_rotate}
+  random_flip: True
+
+val:
+  _target_: methods.kpsfr.data.adapter.KpsfrDatasetAdapter
+  dataset:
+    _target_: methods.common.datasets.wc2014.WorldCup2014Dataset
+    folder: .scratch/dataset/wc2014/soccer_data/test
+  num_objects: ${common.num_objects}
+  noise_translate: 0.0
+  noise_rotate: 0.0
+  random_flip: False
